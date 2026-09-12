@@ -1,0 +1,34 @@
+{
+  "mk1": {
+    "nombre": "PRIMARIA",
+    "host": "10.255.255.7",
+    "api_port": 8728,
+    "ssl": false,
+    "username": "metadmin",
+    "password": "M3t4dm1n#..-"
+  },
+  "mk2": {
+    "nombre": "MikroTik-02",
+    "host": "10.0.0.2",
+    "api_port": 8728,
+    "ssl": false,
+    "username": "apiuser",
+    "password": "TuPassword"
+  },
+    "mk3": {
+    "nombre": "MikroTik-02",
+    "host": "10.0.0.2",
+    "api_port": 8728,
+    "ssl": false,
+    "username": "apiuser",
+    "password": "TuPassword"
+  },
+    "mk4": {
+    "nombre": "MikroTik-02",
+    "host": "10.0.0.2",
+    "api_port": 8728,
+    "ssl": false,
+    "username": "apiuser",
+    "password": "TuPassword"
+  }
+}
