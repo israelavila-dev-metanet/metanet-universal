@@ -4,38 +4,38 @@
     "host": "10.255.255.7",
     "api_port": 8728,
     "ssl": false,
-    "username": "metadmin",
-    "password": "M3t4dm1n#..-"
+    "username": "israel.avila",
+    "password": "UkWWMdt3"
   },
   "mk2": {
 
     "host": "10.255.255.5",
     "api_port": 8728,
     "ssl": false,
-    "username": "metadmin",
-    "password": "M3t4dm1n#..-"
+    "username": "israel.avila",
+    "password": "UkWWMdt3"
   },
     "mk3": {
 
     "host": "10.255.255.6",
     "api_port": 8728,
     "ssl": false,
-    "username": "metadmin",
-    "password": "M3t4dm1n#..-"
+    "username": "israel.avila",
+    "password": "UkWWMdt3"
   },
     "mk4": {
 
     "host": "10.255.255.8",
     "api_port": 8728,
     "ssl": false,
-    "username": "metadmin",
-    "password": "M3t4dm1n#..-"
+    "username": "israel.avila",
+    "password": "UkWWMdt3"
   },
     "mk5": {
     "host": "10.255.255.9",
     "api_port": 8728,
     "ssl": false,
-    "username": "metadmin",
-    "password": "M3t4dm1n#..-"
+    "username": "israel.avila",
+    "password": "UkWWMdt3"
   }
 }

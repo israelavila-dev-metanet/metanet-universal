@@ -1,120 +1,109 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useState, useEffect } from 'react';
+import {getMikrotikData} from './services/mikrotis.tsx';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+const [mikrotik, setMikrotik] = useState<any[]>([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+useEffect(() => {
+  const fetchData = async () => {
+    console.log('Mikrotik data in App component:');
+    try {
+      const data = await getMikrotikData();
+      setMikrotik(data);
+      setLoading(false);
+    }catch (error) {
+    console.error('ERROR EN APP:', error);
+    setError(String(error));
+    setLoading(false);
+    }
+    // } catch (error) {
+    //   setError('Error fetching data');
+    //   setLoading(false);
+    // }
+  };
+
+  fetchData();
+}, []);
+
+if (loading) {
+  return <div>Loading...</div>;
+}
+
+if (error) {
+  return <div>{error}</div>;
+} 
 
   return (
     <>
-      <section id="center">
-        <div className="hero font-bold">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1 className="text-3sm font-bold">Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+    <div className="min-h-screen flex flex-col bg-gray-100">
+    <header className="flex bg-gray-800 text-white text-center">
+          <nav className="flex items-center space-x-4 text-center"> 
+                <ul className="flex justify-between space-x-4 gap-4 text-center">
+                  <li><p className="text-center">Mikrotik API</p></li>
+                  <li><p className="text-center">Devices</p></li>
+                </ul>
+          </nav>
+    </header>
+    <main className="flex-1 p-6">
+      <table className="border-separate border border-gray-400 ...">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 ...">dsdsf</th>
+            <th className="border border-gray-300 ...">sdf</th>
+            <th className="border border-gray-300 ...">IDENTITY</th>
+            <th className="border border-gray-300 ...">VERSION</th>
+            <th className="border border-gray-300 ...">PPOE-USERS</th>
+            <th className="border border-gray-300 ...">PPOE-USERasdS</th>
+            <th className="border border-gray-300 ...">ACCIONES</th>
+          </tr>
+        </thead>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <tbody>
+        {Object.entries(mikrotik).map(([id, router]: [string, any]) => (
+          <tr key={id}>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <td className="border border-gray-300 px-4 py-2">
+              {router.identity}
+            </td>
+
+            <td className="border border-gray-300 px-4 py-2">
+              {router.version}
+            </td>
+
+            <td className="border border-gray-300 px-4 py-2 text-center">
+              {router.pppoe_users}
+            </td>
+
+            <td className="border border-gray-300 px-4 py-2">
+              {router.host}
+            </td>
+
+            <td className="border border-gray-300 px-4 py-2">
+              <button
+                className="bg-blue-500 text-white px-3 py-1 rounded"
+                onClick={() => console.log("Router seleccionado:", id, router)}
+              >
+                Ver
+              </button>
+            </td>
+
+          </tr>
+        ))}
+      </tbody>
+   
+      </table>
+    </main>
+
+    <footer className="bg-gray-800 text-white p-4 text-center text-sm">
+        &copy; 2026 IJAM&SOFIA. All rights reserved.
+    </footer>
+    </div>
+   
+   
     </>
   )
 }
